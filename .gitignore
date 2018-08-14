@@ -1,3 +1,6 @@
+#  Ansible retry files
+*.retry
+
 #  Local .terraform directories
 **/.terraform/*
 
@@ -7,3 +10,4 @@
 
 # .tfvars files
 *.tfvars
+
