@@ -11,3 +11,6 @@
 # .tfvars files
 *.tfvars
 
+#  OSX files
+.DS_Store
+
