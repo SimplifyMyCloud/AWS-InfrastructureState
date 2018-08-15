@@ -1,0 +1,23 @@
+---
+  # test_foundation_state.yml
+  # define the foundation layer using the test
+  # environment vars file
+
+  - name: ensure the foundation state for the test env
+    hosts: localhost
+    connection: local
+    gather_facts: no
+
+    vars_files:
+      - group_vars/test_env.yml
+
+    roles:
+      - aws_vpc
+      - aws_iam
+      - aws_secgrp
+      - aws_route53
+
+    tags:
+      - test_env
+      - foundation
+...

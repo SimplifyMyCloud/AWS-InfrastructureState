@@ -1,0 +1,23 @@
+---
+  # dev_foundation_state.yml
+  # define the foundation layer using the development 
+  # environment vars file
+
+  - name: ensure the foundation state for the dev env
+    hosts: localhost
+    connection: local
+    gather_facts: no
+
+    vars_files:
+      - group_vars/dev_env.yml
+
+    roles:
+      - aws_vpc
+      - aws_iam
+      - aws_secgrp
+      - aws_route53
+
+    tags:
+      - dev_env
+      - foundation
+...
