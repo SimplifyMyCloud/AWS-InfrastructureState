@@ -1,0 +1,19 @@
+---
+  # aws_vpc_production.yml - playbook to ensure the state of the VPC
+  # in the production environment
+
+- name: ensure a vpc is deployed for production environment
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - group_vars/production.yml
+
+  roles:
+    - aws_vpc
+
+  tags:
+    - aws_production_env
+    - aws_vpc
+...

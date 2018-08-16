@@ -1,0 +1,16 @@
+---
+  # aws_vpc.yml - playbook to put a VPC into a deployed state
+
+  - name: ensure vpc's are deployed in dev, qa and production environments
+    hosts: localhost
+    connection: local
+    gather_facts: no
+    roles:
+      - aws_vpc_dev.yml
+      - aws_vpc_test.yml
+      - aws_vpc_stage.yml
+      - aws_vpc_production.yml
+
+    tags:
+      - aws_vpc
+... 
