@@ -1,2 +1,54 @@
 ---
-# tasks file for aws_iam
+# tasks file for roles/aws_iam
+
+- name: Ensure listed IAM groups are present
+  iam:
+    iam_type: group
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ aws_iam_groups }}"
+
+- name: Ensure listed IAM users are present
+  iam:
+    iam_type: user
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ aws_iam_users }}"
+
+- name: Ensure listed IAM roles are present
+  iam:
+    iam_type: role
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ aws_iam_roles }}"
+
+- name: Ensure users are joined to dev group
+  iam:
+    iam_type: user
+    name: "{{ item }}"
+    state: update
+    groups: aws_devs
+  with_items:
+    - "{{ aws_iam_dev_users }}"
+
+- name: Ensure users are joined to the tester group
+  iam:
+    iam_type: user
+    name: "{{ item }}"
+    state: update
+    groups: aws_testers
+  with_items:
+    - "{{ aws_iam_tester_users }}"
+
+- name: Ensure users are joined to the sysadmin group
+  iam:
+    iam_type: user
+    name: "{{ item }}"
+    state: update
+    groups: aws_sysadmins
+  with_items:
+    - "{{ aws_iam_sysadmin_users }}"
+...
