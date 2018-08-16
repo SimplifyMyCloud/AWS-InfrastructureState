@@ -47,6 +47,7 @@ aws_iam_sysadmin_users:
 ####################################
 # <VPC>
 ####################################
+aws_vpc_name: smc_test_vpc
 vpc_resource_tags: { "Name":"smc_prod_vpc", "deploy_environment":"{{ deploy_environment }}", "resource_group":"{{ resource_group }}" }
 az_a_resource_tags: { "Name":"smc_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"a", "resource_group":"{{ resource_group }}" }
 az_b_resource_tags: { "Name":"smc_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"b", "resource_group":"{{ resource_group }}" }
