@@ -1,0 +1,19 @@
+---
+  # aws_route53_dev.yml - playbook to ensure the state of the route53
+  # in the dev environment
+
+- name: ensure the security group state for dev environment
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - group_vars/dev.yml
+
+  roles:
+    - aws_route53
+
+  tags:
+    - aws_dev_env
+    - aws_route53
+...
