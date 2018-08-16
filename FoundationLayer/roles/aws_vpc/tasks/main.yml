@@ -1,36 +1,102 @@
 ---
 # tasks file for roles/aws_vpc
 
-- name: deploy AWS VPC with public and private subnets
-  ec2_vpc:
+- name: ensure the VPC state
+  ec2_vpc_net:
     state: present
+    tenancy: default
     region: "{{ aws_region }}"
     cidr_block: "10.{{ region_octet }}.0.0/16"
     resource_tags: "{{ vpc_resource_tags }}"
-    subnets:
-      - cidr: "10.{{ region_octet }}.10.0/24"
-        az: "{{ aws_region }}a"
-        resource_tags: "{{ az_a_resource_tags }}"
-      - cidr: "10.{{ region_octet }}.110.0/24"
-        az: "{{ aws_region }}a"
-        resource_tags: "{{ az_a_external_resource_tags }}"
-      - cidr: "10.{{ region_octet }}.20.0/24"
-        az: "{{ aws_region }}b"
-        resource_tags: "{{ az_b_resource_tags }}"
-      - cidr: "10.{{ region_octet }}.120.0/24"
-        az: "{{ aws_region }}b"
-        resource_tags: "{{ az_b_external_resource_tags }}"
-      - cidr: "10.{{ region_octet }}.30.0/24"
-        az: "{{ aws_region }}c"
-        resource_tags: "{{ az_c_resource_tags }}"
-      - cidr: "10.{{ region_octet }}.130.0/24"
-        az: "{{ aws_region }}c"
-        resource_tags: "{{ az_c_external_resource_tags }}"
   register: vpc
 
 - name: print out the vpc id
   debug:
     msg: "A VPC with an id of {{ vpc.vpc_id }} is present"
+
+- name: ensure {{ vpc.vpc_id }} private subnet state for availability zone a
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    cidr: "10.{{ region_octet }}.10.0/24"
+    az: "{{ aws_region }}a"
+    resource_tags: "{{ az_a_resource_tags }}"
+  register: private_subnet_a
+
+- name: print out the subnet id
+  debug:
+    msg: "A private subnet with an id of {{ private_subnet_a.subnet_id }} is present in VPC {{ vpc.vpc_id }} in the availability zone a"
+
+- name: ensure {{ vpc.vpc_id }} public subnet state for availability zone a
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    cidr: "10.{{ region_octet }}.110.0/24"
+    az: "{{ aws_region }}a"
+    resource_tags: "{{ az_a_external_resource_tags }}"
+    register: public_subnet_a
+
+- name: print out the subnet id
+  debug:
+    msg: "A public subnet with an id of {{ public_subnet_a.subnet_id }} is present in VPC {{ vpc.vpc_id }} in the availability zone a"
+
+- name: ensure {{ vpc.vpc_id }} private subnet state for availability zone b
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    cidr: "10.{{ region_octet }}.20.0/24"
+    az: "{{ aws_region }}b"
+    resource_tags: "{{ az_b_resource_tags }}"
+    register: private_subnet_b
+
+- name: print out the subnet id
+  debug:
+    msg: "A private subnet with an id of {{ private_subnet_b.subnet_id }} is present in VPC {{ vpc.vpc_id }} in the availability zone b"
+
+- name: ensure {{ vpc.vpc_id }} public subnet state for availability zone b
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    cidr: "10.{{ region_octet }}.120.0/24"
+    az: "{{ aws_region }}b"
+    resource_tags: "{{ az_b_external_resource_tags }}"
+    register: public_subnet_b
+
+- name: print out the subnet id
+  debug:
+    msg: "A public subnet with an id of {{ public_subnet_b.subnet_id }} is present in VPC {{ vpc.vpc_id }} in the availability zone b"
+
+- name: ensure {{ vpc.vpc_id }} private subnet state for availability zone c
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    cidr: "10.{{ region_octet }}.30.0/24"
+    az: "{{ aws_region }}c"
+    resource_tags: "{{ az_c_resource_tags }}"
+    register: private_subnet_c
+
+- name: print out the subnet id
+  debug:
+    msg: "A private subnet with an id of {{ private_subnet_c.subnet_id }} is present in VPC {{ vpc.vpc_id }} in the availability zone c"
+
+- name: ensure {{ vpc.vpc_id }} public subnet state for availability zone c
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    cidr: "10.{{ region_octet }}.130.0/24"
+    az: "{{ aws_region }}c"
+    resource_tags: "{{ az_c_external_resource_tags }}"
+    register: public_subnet_c
+
+- name: print out the subnet id
+  debug:
+    msg: "A public subnet with an id of {{ public_subnet_c.subnet_id }} is present in VPC {{ vpc.vpc_id }} in the availability zone c"
 
 - name: ensure an internet gateway is attached to {{ vpc.vpc_id }}
   ec2_vpc_igw:
