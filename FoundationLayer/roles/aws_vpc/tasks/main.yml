@@ -1,2 +1,76 @@
 ---
-# tasks file for aws_vpc
+# tasks file for roles/aws_vpc
+
+- name: deploy AWS VPC with public and private subnets
+  ec2_vpc:
+    state: present
+    region: "{{ aws_region }}"
+    cidr_block: "10.{{ region_octet }}.0.0/16"
+    resource_tags: "{{ vpc_resource_tags }}"
+    subnets:
+      - cidr: "10.{{ region_octet }}.10.0/24"
+        az: "{{ aws_region }}a"
+        resource_tags: "{{ az_a_resource_tags }}"
+      - cidr: "10.{{ region_octet }}.110.0/24"
+        az: "{{ aws_region }}a"
+        resource_tags: "{{ az_a_external_resource_tags }}"
+      - cidr: "10.{{ region_octet }}.20.0/24"
+        az: "{{ aws_region }}b"
+        resource_tags: "{{ az_b_resource_tags }}"
+      - cidr: "10.{{ region_octet }}.120.0/24"
+        az: "{{ aws_region }}b"
+        resource_tags: "{{ az_b_external_resource_tags }}"
+      - cidr: "10.{{ region_octet }}.30.0/24"
+        az: "{{ aws_region }}c"
+        resource_tags: "{{ az_c_resource_tags }}"
+      - cidr: "10.{{ region_octet }}.130.0/24"
+        az: "{{ aws_region }}c"
+        resource_tags: "{{ az_c_external_resource_tags }}"
+  register: vpc
+
+- name: print out the vpc id
+  debug:
+    msg: "A VPC with an id of {{ vpc.vpc_id }} is present"
+
+- name: ensure an internet gateway is attached to {{ vpc.vpc_id }}
+  ec2_vpc_igw:
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    state: present
+  register: igw
+
+- name: ensure the igw is tagged
+  ec2_tag:
+    resource: "{{ igw.gateway_id }}"
+    region: "{{ aws_region }}"
+    state: present
+    tags: "{{ vpc_igw_resource_tags }}"
+
+- name: print out the internet gateway id
+  debug:
+    msg: "The {{ vpc.vpc_id }} has an internet gateway of {{ igw.gateway_id }}"
+
+- name: ensure a public routing table in the vpc
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ aws_region }}"
+    subnets:
+      - 10.{{ region_octet }}.10.0/24
+      - 10.{{ region_octet }}.20.0/24
+      - 10.{{ region_octet }}.30.0/24
+      - 10.{{ region_octet }}.110.0/24
+      - 10.{{ region_octet }}.120.0/24
+      - 10.{{ region_octet }}.130.0/24
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ igw.gateway_id }}"
+  register: rtb
+
+- name: ensure the route table is tagged
+  ec2_tag:
+    resource: "{{ rtb.route_table.id }}"
+    region: "{{ aws_region }}"
+    state: present
+    tags: "{{ vpc_public_route_table_resource_tags }}"
+
+...    
