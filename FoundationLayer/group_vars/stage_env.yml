@@ -6,6 +6,16 @@
 ####################################
 deploy_environment: stage
 resource_group: stage_rg
+aws_region: us-west-2
+# region octets - set the region octet that is the target of the infrastructure state
+# US West Oregon us-west-2 = 100
+# US West Cali us-west-1 = 110
+# US East Ohio us-east- = 120
+# US East Virgina us-east-1 = 130
+# Euro West Ireland = 200
+# Euro West UK = 210
+# Euro East Germany = 220
+region_octet: 100
 ####################################
 # </common vars for stage>
 ####################################
@@ -37,16 +47,16 @@ aws_iam_sysadmin_users:
 ####################################
 # <VPC>
 ####################################
-vpc_resource_tags: { "Name":"ansible_prod_vpc", "deploy_environment":"{{ deploy_environment }}", "resource_group":"{{ resource_group }}" }
-az_a_resource_tags: { "Name":"ansible_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"a", "resource_group":"{{ resource_group }}" }
-az_b_resource_tags: { "Name":"ansible_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"b", "resource_group":"{{ resource_group }}" }
-az_c_resource_tags: { "Name":"ansible_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"c", "resource_group":"{{ resource_group }}" }
-az_a_external_resource_tags: { "Name":"ansible_ex_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_a", "resource_group":"{{ resource_group }}"}
-az_b_external_resource_tags: { "Name":"ansible_ex_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_b", "resource_group":"{{ resource_group }}" }
-az_c_external_resource_tags: { "Name":"ansible_ex_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_c", "resource_group":"{{ resource_group }}" }
-vpc_igw_resource_tags: { "Name":"ansible_igw", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}" }
-vpc_public_route_table_resource_tags: { "Name":"ansible_public_route", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}"}
-vpc_private_route_table_resource_tags: { "Name":"ansible_private_route", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}"}
+vpc_resource_tags: { "Name":"smc_prod_vpc", "deploy_environment":"{{ deploy_environment }}", "resource_group":"{{ resource_group }}" }
+az_a_resource_tags: { "Name":"smc_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"a", "resource_group":"{{ resource_group }}" }
+az_b_resource_tags: { "Name":"smc_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"b", "resource_group":"{{ resource_group }}" }
+az_c_resource_tags: { "Name":"smc_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"c", "resource_group":"{{ resource_group }}" }
+az_a_external_resource_tags: { "Name":"smc_ex_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_a", "resource_group":"{{ resource_group }}"}
+az_b_external_resource_tags: { "Name":"smc_ex_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_b", "resource_group":"{{ resource_group }}" }
+az_c_external_resource_tags: { "Name":"smc_ex_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_c", "resource_group":"{{ resource_group }}" }
+vpc_igw_resource_tags: { "Name":"smc_igw", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}" }
+vpc_public_route_table_resource_tags: { "Name":"smc_public_route", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}"}
+vpc_private_route_table_resource_tags: { "Name":"smc_private_route", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}"}
 ####################################
 # </VPC>
 ####################################
