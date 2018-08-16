@@ -1,0 +1,19 @@
+---
+  # aws_iam_test.yml - playbook to ensure the state of the iam
+  # in the test environment
+
+- name: ensure the security group state for test environment
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - group_vars/test.yml
+
+  roles:
+    - aws_iam
+
+  tags:
+    - aws_test_env
+    - aws_iam
+...
