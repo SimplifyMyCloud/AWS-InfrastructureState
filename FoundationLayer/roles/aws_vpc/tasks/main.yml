@@ -3,6 +3,7 @@
 
 - name: ensure the VPC state
   ec2_vpc_net:
+    name: "{{ aws_vpc_name }}"
     state: present
     tenancy: default
     region: "{{ aws_region }}"
