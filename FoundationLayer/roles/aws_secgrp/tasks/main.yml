@@ -5,7 +5,7 @@
   ec2_group:
     name: "{{ deploy_environment }}_sec_group"
     description: "VPC security group for the {{ deploy_environment }} environment"
-    vpc_id: "{{ vpc.vpc_id }}"
+    vpc_id: "{{ vpc.vpc.id }}"
     region: "{{ aws_region }}"
     rules:
       - proto: tcp

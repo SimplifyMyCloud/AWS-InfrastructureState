@@ -4,7 +4,7 @@
 - name: deploy a route53 DNS entry
   route53:
     command: create
-    zone: simplifymy.biz
+    zone: simplifymy.cloud
     record: lets.simplifymy.biz
     type: A
     ttl: 7200

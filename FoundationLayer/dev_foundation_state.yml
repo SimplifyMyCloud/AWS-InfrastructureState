@@ -13,8 +13,8 @@
 
     roles:
       - aws_vpc
-      #- aws_iam
-      #- aws_secgrp
+      - aws_iam
+      - aws_secgrp
       #- aws_route53
 
     tags:
