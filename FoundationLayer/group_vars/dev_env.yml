@@ -5,7 +5,7 @@
 # <common vars for dev>
 ####################################
 deploy_environment: dev
-resource_group: dev_rg
+resource_group: smc_lawdemo
 aws_region: us-west-2
 # region octets - set the region octet that is the target of the infrastructure state
 # US West Oregon us-west-2 = 100
