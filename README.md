@@ -1,12 +1,12 @@
-# SMC Infrastructure State
+# SMC Infrastructure State for Amazon Web Services
 
-SimplifyMy.Cloud infrastructure state with a focus on simplicity and empathy.
+SimplifyMy.Cloud infrastructure state with a focus on simplicity and empathy for AWS.
 
 ---
 
 ## Infrastructure Layers
 
-Breaking apart the cloud into three layers delivers a simple infrastructure state to manage and push changes to.  The goal of a well defined and engineered infrastructure is a DevOps culture which promotes healthy colaboration between all customers of that infrastructure, development, operations, security, end users and management.  Infrastructure empathy is the foundation which this is engineered.  Empathy for developers so they will never worry about making accidental changes to Production, emapthy of operations by incorporating self-healing and self-sizing along with self-service for other teams, emapthy for the security folks by siloing environments and access into auditable and verifiable worlds.
+Breaking apart AWS into three layers delivers a simple infrastructure state to manage and push changes to.  The goal of a well defined and engineered infrastructure is a DevOps culture which promotes healthy colaboration between all customers of that infrastructure, development, operations, security, end users and management.  Infrastructure empathy is the foundation which this is engineered.  Empathy for developers so they will never worry about making accidental changes to Production, emapthy of operations by incorporating self-healing and self-sizing along with self-service for other teams, emapthy for the security folks by siloing environments and access into auditable and verifiable worlds.
 
 
 

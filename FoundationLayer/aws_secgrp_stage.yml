@@ -1,0 +1,19 @@
+---
+  # aws_secgrp_stage.yml - playbook to ensure the state of the secgrp
+  # in the stage environment
+
+- name: ensure the security group state for stage environment
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - group_vars/stage.yml
+
+  roles:
+    - aws_secgrp
+
+  tags:
+    - aws_stage_env
+    - aws_secgrp
+...

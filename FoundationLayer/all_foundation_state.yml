@@ -1,0 +1,11 @@
+---
+# all_foundation_state.yml - ensures the state of the foundation layer in development,
+# test, stage and production.
+# to target a specific environment, call that environments playbook ex. dev_foundation_state.yml
+
+  # foundation level
+  - include: aws_vpc.yml
+  - include: aws_iam.yml
+  - include: aws_secgrp.yml
+  #- include: aws_route53.yml
+...
