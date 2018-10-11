@@ -3,27 +3,27 @@ provider  "aws"     {
 }
 
 variable "vpc_private_subnet_name_a" {
-  description   =   "the name of the private subnet for the "${var.environment}" environment in the A availability zone" 
+  description   =   "the name of the private subnet for the environment in the A availability zone" 
 }
 
 variable "vpc_private_subnet_name_b" {
-  description   =   "the name of the private subnet for the "${var.environment}" environment in the B availability zone" 
+  description   =   "the name of the private subnet for the environment in the B availability zone" 
 }
 
 variable "vpc_private_subnet_name_c" {
-  description   =   "the name of the private subnet for the "${var.environment}" environment in the C availability zone" 
+  description   =   "the name of the private subnet for the environment in the C availability zone" 
 }
 
 variable "vpc_public_subnet_name_a" {
-  description   =   "the name of the public subnet for the "${var.environment}" environment in the A availability zone" 
+  description   =   "the name of the public subnet for the environment in the A availability zone" 
 }
 
 variable "vpc_public_subnet_name_b" {
-  description   =   "the name of the public subnet for the "${var.environment}" environment in the B availability zone" 
+  description   =   "the name of the public subnet for the environment in the B availability zone" 
 }
 
 variable "vpc_public_subnet_name_c" {
-  description   =   "the name of the public subnet for the "${var.environment}" environment in the C availability zone" 
+  description   =   "the name of the public subnet for the environment in the C availability zone" 
 }
 
 variable  "environment" {
@@ -39,7 +39,7 @@ variable  "automation"  {
 }
 
 resource    "aws_subnet"    "private_subnet_a"   {
-    vpc_id      =   "${aws_vpc.vpc.id}"
+    vpc_id      =   "${module.aws_vpc.vpc_id}"
     cidr_block  =   "10.0.10.0/24"
 
     tags         {
@@ -51,8 +51,8 @@ resource    "aws_subnet"    "private_subnet_a"   {
 }
 
 resource    "aws_subnet"    "private_subnet_b"   {
-    vpc_id      =   "${aws_vpc.vpc.id}"
-    cidr_block  =   "10.0.10.0/24"
+    vpc_id      =   "${module.aws_vpc.vpc_id}"
+    cidr_block  =   "10.0.20.0/24"
 
     tags         {
         Name        = "${var.vpc_private_subnet_name_b}"
@@ -63,8 +63,8 @@ resource    "aws_subnet"    "private_subnet_b"   {
 }
 
 resource    "aws_subnet"    "private_subnet_c"   {
-    vpc_id      =   "${aws_vpc.vpc.id}"
-    cidr_block  =   "10.0.10.0/24"
+    vpc_id      =   "${module.aws_vpc.vpc_id}"
+    cidr_block  =   "10.0.30.0/24"
 
     tags         {
         Name        = "${var.vpc_private_subnet_name_c}"
@@ -75,8 +75,8 @@ resource    "aws_subnet"    "private_subnet_c"   {
 }
 
 resource    "aws_subnet"    "public_subnet_a"   {
-    vpc_id      =   "${aws_vpc.vpc.id}"
-    cidr_block  =   "10.0.10.0/24"
+    vpc_id      =   "${module.aws_vpc.vpc_id}"
+    cidr_block  =   "10.0.100.0/24"
 
     tags         {
         Name        = "${var.vpc_public_subnet_name_a}"
@@ -86,9 +86,9 @@ resource    "aws_subnet"    "public_subnet_a"   {
   }
 }
 
-resource    "aws_subnet"    "private_subnet_b"   {
-    vpc_id      =   "${aws_vpc.vpc.id}"
-    cidr_block  =   "10.0.10.0/24"
+resource    "aws_subnet"    "public_subnet_b"   {
+    vpc_id      =   "${module.aws_vpc.vpc_id}"
+    cidr_block  =   "10.0.110.0/24"
 
     tags         {
         Name        = "${var.vpc_public_subnet_name_b}"
@@ -98,9 +98,9 @@ resource    "aws_subnet"    "private_subnet_b"   {
   }
 }
 
-resource    "aws_subnet"    "private_subnet_c"   {
-    vpc_id      =   "${aws_vpc.vpc.id}"
-    cidr_block  =   "10.0.10.0/24"
+resource    "aws_subnet"    "public_subnet_c"   {
+    vpc_id      =   "${module.aws_vpc.vpc_id}"
+    cidr_block  =   "10.0.120.0/24"
 
     tags         {
         Name        = "${var.vpc_public_subnet_name_c}"
