@@ -1,3 +1,6 @@
+##############################################
+# Ensure the state of a VPC for an environment
+##############################################
 variable  "vpc_name"  {
   description   = "the name of the vpc"
 }
@@ -36,3 +39,6 @@ output  "vpc_arn" {
 output  "vpc_cidr_block"  {
   value   = "${aws_vpc.vpc.cidr_block}"
 }
+#########################################################
+# Ensure the state of subnets in a VPC for an environment
+#########################################################

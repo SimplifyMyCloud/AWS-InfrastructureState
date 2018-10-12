@@ -1,5 +1,5 @@
 module "aws_vpc" {
-  source = "/Users/spudbud/Codestuff/AWS-InfrastructureState/FoundationLayer/modules/aws_vpc"
+  source = "/Users/spudbud/Codestuff/AWS-InfrastructureState/FoundationLayer/modules/aws_networking"
 
   vpc_name    =   "smc-dev-vpc"
   environment =   "development"
