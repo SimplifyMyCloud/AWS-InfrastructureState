@@ -1,9 +1,5 @@
-provider  "aws"     {
-  region  =   "us-west-2"
-}
-
-variable "vpc_name" {
-  description   =   "the name of the VPC for the development environment" 
+variable  "vpc_name"  {
+  description   = "the name of the vpc"
 }
 
 variable  "environment" {

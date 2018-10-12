@@ -26,21 +26,7 @@ variable "vpc_private_subnet_name_a" {
 #  description   =   "the name of the public subnet for the environment in the C availability zone" 
 #}
 
-variable  "environment" {
-  description   =   "the environment being targeted to ensure the desired state"
-}
 
-variable  "layer" {
-  description   =   "the infrastructure layer being targeted"
-}
-
-variable  "automation"  {
-  description   =   "which tool is being used to ensure the state of the infrastructure, terraform or ansible"
-}
-
-variable  "aws_vpc"   {
-  description   =   "the VPC the subnet needs to deploy into"
-}
 
 resource    "aws_subnet"    "private_subnet_a"   {
     vpc_id      =   "${var.aws_vpc.vpc_id}"
