@@ -38,8 +38,12 @@ variable  "automation"  {
   description   =   "which tool is being used to ensure the state of the infrastructure, terraform or ansible"
 }
 
+variable  "aws_vpc"   {
+  description   =   "the VPC the subnet needs to deploy into"
+}
+
 resource    "aws_subnet"    "private_subnet_a"   {
-    vpc_id      =   "${module.aws_vpc.vpc_id}"
+    vpc_id      =   "${var.aws_vpc.vpc_id}"
     cidr_block  =   "10.0.10.0/24"
 
     tags         {
