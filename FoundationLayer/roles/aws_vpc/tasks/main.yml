@@ -20,84 +20,88 @@
     state: present
     vpc_id: "{{ vpc.vpc.id }}"
     region: "{{ aws_region }}"
-    cidr: "10.{{ region_octet }}.10.0/24"
+    cidr: "10.{{ region_octet }}.0.0/19"
     az: "{{ aws_region }}a"
     resource_tags: "{{ az_a_resource_tags }}"
   register: private_subnet_a
 
 - name: print out the subnet id
   debug:
-    msg: "A private subnet with an id of {{ private_subnet_a.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone a"
+    msg: "A private subnet with an id of {{ private_subnet_a.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone a with 8,190 available IP addresses and a usable range of 10.10.0.1 - 10.10.31.254"
 
 - name: ensure {{ vpc.vpc.id }} public subnet state for availability zone a
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc.vpc.id }}"
     region: "{{ aws_region }}"
-    cidr: "10.{{ region_octet }}.110.0/24"
+    cidr: "10.{{ region_octet }}.32.0/19"
     az: "{{ aws_region }}a"
     resource_tags: "{{ az_a_external_resource_tags }}"
   register: public_subnet_a
 
 - name: print out the subnet id
   debug:
-    msg: "A public subnet with an id of {{ public_subnet_a.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone a"
+    msg: "A public subnet with an id of {{ public_subnet_a.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone a with 8,190 available IP addresses and a usable range of 10.10.32.1 - 10.10.63.254"
 
 - name: ensure {{ vpc.vpc.id }} private subnet state for availability zone b
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc.vpc.id }}"
     region: "{{ aws_region }}"
-    cidr: "10.{{ region_octet }}.20.0/24"
+    cidr: "10.{{ region_octet }}.64.0/19"
     az: "{{ aws_region }}b"
     resource_tags: "{{ az_b_resource_tags }}"
   register: private_subnet_b
 
 - name: print out the subnet id
   debug:
-    msg: "A private subnet with an id of {{ private_subnet_b.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone b"
+    msg: "A private subnet with an id of {{ private_subnet_b.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone b with 8,190 available IP addresses and a usable range of 10.10.64.1 - 10.10.95.254"
 
 - name: ensure {{ vpc.vpc.id }} public subnet state for availability zone b
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc.vpc.id }}"
     region: "{{ aws_region }}"
-    cidr: "10.{{ region_octet }}.120.0/24"
+    cidr: "10.{{ region_octet }}.96.0/19"
     az: "{{ aws_region }}b"
     resource_tags: "{{ az_b_external_resource_tags }}"
   register: public_subnet_b
 
 - name: print out the subnet id
   debug:
-    msg: "A public subnet with an id of {{ public_subnet_b.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone b"
+    msg: "A public subnet with an id of {{ public_subnet_b.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone b with 8,190 available IP addresses and a usable range of 10.10.96.1 - 10.10.127.254"
 
 - name: ensure {{ vpc.vpc.id }} private subnet state for availability zone c
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc.vpc.id }}"
     region: "{{ aws_region }}"
-    cidr: "10.{{ region_octet }}.30.0/24"
+    cidr: "10.{{ region_octet }}.128.0/19"
     az: "{{ aws_region }}c"
     resource_tags: "{{ az_c_resource_tags }}"
   register: private_subnet_c
 
 - name: print out the subnet id
   debug:
-    msg: "A private subnet with an id of {{ private_subnet_c.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone c"
+    msg: "A private subnet with an id of {{ private_subnet_c.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone c with 8,190 available IP addresses and a usable range of 10.10.128.1 - 10.10.159.254"
 
 - name: ensure {{ vpc.vpc.id }} public subnet state for availability zone c
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc.vpc.id }}"
-    region: "{{ aws_region }}"
-    cidr: "10.{{ region_octet }}.130.0/24"
+    region: "{{ aws_region }}" 
+    cidr: "10.{{ region_octet }}.160.0/19"
     az: "{{ aws_region }}c"
     resource_tags: "{{ az_c_external_resource_tags }}"
   register: public_subnet_c
 
 - name: print out the subnet id
   debug:
-    msg: "A public subnet with an id of {{ public_subnet_c.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone c"
+    msg: "A public subnet with an id of {{ public_subnet_c.subnet.id }} is present in VPC {{ vpc.vpc.id }} in the availability zone c with 8,190 available IP addresses and a usable range of 10.10.160.1 - 10.10.191.254"
+
+- name: print out the spare IP space
+  debug:
+    msg: "There is a spare IP space of 10.10.192.0/18 which contains 16382 IP addresses in the range of 10.10.192.1 - 10.10.255.254"
 
 - name: ensure an internet gateway is attached to {{ vpc.vpc.id }}
   ec2_vpc_igw:
@@ -122,15 +126,13 @@
     vpc_id: "{{ vpc.vpc.id }}"
     region: "{{ aws_region }}"
     subnets:
-      - 10.{{ region_octet }}.10.0/24
-      - 10.{{ region_octet }}.20.0/24
-      - 10.{{ region_octet }}.30.0/24
-      - 10.{{ region_octet }}.110.0/24
-      - 10.{{ region_octet }}.120.0/24
-      - 10.{{ region_octet }}.130.0/24
+      - "{{ public_subnet_a.subnet.id }}"
+      - "{{ public_subnet_b.subnet.id }}"
+      - "{{ public_subnet_c.subnet.id }}"
     routes:
       - dest: 0.0.0.0/0
         gateway_id: "{{ igw.gateway_id }}"
+      - dest: 10.10.0.0/16
   register: rtb
 
 - name: ensure the route table is tagged
@@ -140,4 +142,27 @@
     state: present
     tags: "{{ vpc_public_route_table_resource_tags }}"
 
+- name: ensure a private routing table in the vpc
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc.vpc.id }}"
+    region: "{{ aws_region }}"
+    subnets:
+      - "{{ private_subnet_a.subnet.id }}"
+      - "{{ private_subnet_b.subnet.id }}"
+      - "{{ private_subnet_c.subnet.id }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ igw.gateway_id }}"
+      - dest: 10.10.0.0/16
+  register: rtb
+
+- name: ensure the route table is tagged
+  ec2_tag:
+    resource: "{{ rtb.route_table.id }}"
+    region: "{{ aws_region }}"
+    state: present
+    tags: "{{ vpc_private_route_table_resource_tags }}"
+
+- name: ensure a resource group exists to group the tags with
+  command: aws inspector create-resource-group --resource-group-tags key=resource_group,value="{{ resource_group }}"
 ...    

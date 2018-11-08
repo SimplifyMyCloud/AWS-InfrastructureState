@@ -8,7 +8,7 @@
   gather_facts: no
 
   vars_files:
-    - group_vars/production.yml
+    - group_vars/production_env.yml
 
   roles:
     - aws_vpc

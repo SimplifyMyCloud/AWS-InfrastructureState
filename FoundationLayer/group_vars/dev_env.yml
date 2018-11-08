@@ -8,14 +8,14 @@ deploy_environment: dev
 resource_group: dev_rg
 aws_region: us-west-2
 # region octets - set the region octet that is the target of the infrastructure state
-# US West Oregon us-west-2 = 100
-# US West Cali us-west-1 = 110
-# US East Ohio us-east- = 120
-# US East Virgina us-east-1 = 130
-# Euro West Ireland = 200
-# Euro West UK = 210
-# Euro East Germany = 220
-region_octet: 100
+# US West Oregon us-west-2 = 10
+# US West Cali us-west-1 = 20
+# US East Ohio us-east- = 30
+# US East Virgina us-east-1 = 40
+# Euro West Ireland = 50
+# Euro West UK = 60
+# Euro East Germany = 70
+region_octet: 10
 ####################################
 # </common vars for dev>
 ####################################

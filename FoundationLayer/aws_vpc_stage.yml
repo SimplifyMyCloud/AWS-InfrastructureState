@@ -8,7 +8,7 @@
   gather_facts: no
 
   vars_files:
-    - group_vars/stage.yml
+    - group_vars/stage_env.yml
 
   roles:
     - aws_vpc

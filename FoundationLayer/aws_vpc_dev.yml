@@ -8,7 +8,7 @@
   gather_facts: no
 
   vars_files:
-    - group_vars/dev.yml
+    - group_vars/dev_env.yml
 
   roles:
     - aws_vpc

@@ -12,4 +12,8 @@
         from_port: 22
         to_port: 22
         cidr_ip: 0.0.0.0/0
+      - proto: all
+        from_port: 
+        to_port: 
+        cidr_ip: "10.{{ region_octet }}.0.0/16"
 ...
