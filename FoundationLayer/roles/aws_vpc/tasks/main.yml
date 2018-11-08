@@ -22,7 +22,7 @@
     region: "{{ aws_region }}"
     cidr: "10.{{ region_octet }}.0.0/19"
     az: "{{ aws_region }}a"
-    resource_tags: "{{ az_a_resource_tags }}"
+    resource_tags: "{{ az_a_private_resource_tags }}"
   register: private_subnet_a
 
 - name: print out the subnet id
@@ -36,7 +36,7 @@
     region: "{{ aws_region }}"
     cidr: "10.{{ region_octet }}.32.0/19"
     az: "{{ aws_region }}a"
-    resource_tags: "{{ az_a_external_resource_tags }}"
+    resource_tags: "{{ az_a_public_resource_tags }}"
   register: public_subnet_a
 
 - name: print out the subnet id
@@ -50,7 +50,7 @@
     region: "{{ aws_region }}"
     cidr: "10.{{ region_octet }}.64.0/19"
     az: "{{ aws_region }}b"
-    resource_tags: "{{ az_b_resource_tags }}"
+    resource_tags: "{{ az_b_private_resource_tags }}"
   register: private_subnet_b
 
 - name: print out the subnet id
@@ -64,7 +64,7 @@
     region: "{{ aws_region }}"
     cidr: "10.{{ region_octet }}.96.0/19"
     az: "{{ aws_region }}b"
-    resource_tags: "{{ az_b_external_resource_tags }}"
+    resource_tags: "{{ az_b_public_resource_tags }}"
   register: public_subnet_b
 
 - name: print out the subnet id
@@ -78,7 +78,7 @@
     region: "{{ aws_region }}"
     cidr: "10.{{ region_octet }}.128.0/19"
     az: "{{ aws_region }}c"
-    resource_tags: "{{ az_c_resource_tags }}"
+    resource_tags: "{{ az_c_private_resource_tags }}"
   register: private_subnet_c
 
 - name: print out the subnet id
@@ -92,7 +92,7 @@
     region: "{{ aws_region }}" 
     cidr: "10.{{ region_octet }}.160.0/19"
     az: "{{ aws_region }}c"
-    resource_tags: "{{ az_c_external_resource_tags }}"
+    resource_tags: "{{ az_c_public_resource_tags }}"
   register: public_subnet_c
 
 - name: print out the subnet id

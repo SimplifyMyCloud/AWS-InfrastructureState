@@ -49,12 +49,12 @@ aws_iam_sysadmin_users:
 ####################################
 aws_vpc_name: smc_production_vpc
 vpc_resource_tags: { "Name":"smc_prod_vpc", "deploy_environment":"{{ deploy_environment }}", "resource_group":"{{ resource_group }}" }
-az_a_resource_tags: { "Name":"smc_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"a", "resource_group":"{{ resource_group }}" }
-az_b_resource_tags: { "Name":"smc_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"b", "resource_group":"{{ resource_group }}" }
-az_c_resource_tags: { "Name":"smc_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"c", "resource_group":"{{ resource_group }}" }
-az_a_external_resource_tags: { "Name":"smc_ex_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_a", "resource_group":"{{ resource_group }}"}
-az_b_external_resource_tags: { "Name":"smc_ex_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_b", "resource_group":"{{ resource_group }}" }
-az_c_external_resource_tags: { "Name":"smc_ex_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_c", "resource_group":"{{ resource_group }}" }
+az_a_private_resource_tags: { "Name":"smc_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"a", "resource_group":"{{ resource_group }}" }
+az_b_private_resource_tags: { "Name":"smc_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"b", "resource_group":"{{ resource_group }}" }
+az_c_private_resource_tags: { "Name":"smc_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"c", "resource_group":"{{ resource_group }}" }
+az_a_public_resource_tags: { "Name":"smc_ex_az_a", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_a", "resource_group":"{{ resource_group }}"}
+az_b_public_resource_tags: { "Name":"smc_ex_az_b", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_b", "resource_group":"{{ resource_group }}" }
+az_c_public_resource_tags: { "Name":"smc_ex_az_c", "deploy_region":"{{ aws_region }}", "deploy_environment":"{{ deploy_environment }}", "deploy_az":"external_c", "resource_group":"{{ resource_group }}" }
 vpc_igw_resource_tags: { "Name":"smc_igw", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}" }
 vpc_public_route_table_resource_tags: { "Name":"smc_public_route", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}"}
 vpc_private_route_table_resource_tags: { "Name":"smc_private_route", "deploy_environment":"{{ deploy_environment }}", "deploy_region":"{{ aws_region }}", "resource_group":"{{ resource_group }}"}
